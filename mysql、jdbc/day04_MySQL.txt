@@ -1,0 +1,30 @@
+本单元目标
+
+1. 介绍什么是JDBC  
+2. JDBC的好处 
+3. 通过简单案例演示JDBC的使用步骤 ★ 
+4. 德鲁伊连接池的使用  
+5. 介绍JDBC的相关API ★ 
+6. PreparedStatement和Statement的区别 ★  
+7. 封装JDBCUtils类，用与获取连接和关闭连接  
+8. 批处理  
+9. 演示事务  
+10 DBUtils开源框架的学习  
+11. 封装DAO ★
+
+1. 什么是JDBC?
+	JDBC (Java Database Connectivity) 独立于特定数据库管理系统、通用的SQL数据库存取和操作的公共接口
+	一套接口(一套标准)  SUN公司提出的一套标准   各大数据库厂商去实现标准
+2. JDBC的好处是什么？
+	为程序员减轻负担、扩展性良好
+	
+3. 通过简单案例演示JDBC的使用步骤 ★
+	
+
+
+
+
+
+
+
+	

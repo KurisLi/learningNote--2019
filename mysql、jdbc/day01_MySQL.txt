@@ -1,0 +1,228 @@
+本单元目标  
+1.为什么要学习数据库  
+2.数据库的相关概念 
+	DBMS DB SQL 
+3. MySQl数据库存储数据的特点  
+4. 初识MySQL 
+	MySQL产品介绍 
+	MySQL产品的安装	★ 
+	MySQL服务的启动和停止	★ 
+	MySQL服务的登录和退出	★ 
+	MySQL的常见命令和语法规范  
+5.DDL语言的学习 √  
+	库和表的管理  
+	常见的约束 
+6.DML语言的学习 ★
+	添加数据  
+	修改数据
+	删除数据
+7.DQL语言的学习 ★★★
+	基础查询
+	条件查询
+	排序查询
+	常见函数
+	分组函数
+	分组查询
+	连接查询
+	子查询
+8.DCL语言的学习 
+	事务和事务处理 
+	
+	
+1.为什么要学习数据库  
+	原因：java是将数据存储在运行内存中，需要将数据进行持久化操作(运行内存中的数据存储到磁盘上)
+		a. IO流 -> 字节流、字符流、对象流 
+		b. 数据库：数据库就是存储数据的"仓库" (永久性的)
+	
+	数据库的优点：
+		a. 统一管理易于查询  
+		b. 共享性  
+	
+2.数据库的相关概念 
+	DBMS DB SQL 
+	
+	DB		Database
+		数据库：存储数据的“仓库”，它保存了一系列有组织的数据
+	DBMS	Database Managerment System
+		数据库管理系统:  数据库是通过DBMS创建和操作的容器
+	SQL 	Structure Query Language      
+		结构化查询语言: 专门用来和数据库通信的语言
+
+	MySQL是一个数据库管理系统  
+	
+3. MySQl数据库存储数据的特点 
+	关系型数据库
+	非关系型数据
+		MySQL是关系型数据库众多产品中的一种
+		
+	DBMS中可以创建很多个DB,每一个DB中都有很多个表格(excel),若干个表格和表格之间是有关联关系	
+	
+4. 初识MySQL 
+	MySQL产品介绍 
+		MySQL是一个小型关系型数据库管理系统，开发者为瑞典MySQL AB公司   
+		在2008年1月16号被Sun公司收购。而2009年,SUN又被Oracle收购
+		MySQL被广泛地应用在Internet上的中小型网站中。由于其体积小、速度快、总体拥有成本低
+	MySQL的卸载
+		检查电脑是否安装MySQL数据库    打开cmd-->敲命令   mysql -uroot -p  -->回车
+		
+	MySQL产品的安装	★ 
+		安装的是服务器端
+	MySQL服务的启动和停止	★ 
+	
+		通过工具：搜索服务-->services.msc
+		通过命令:
+			打开cmd命令窗口
+				net stop 服务的名称
+				net start 服务的名称
+		
+	MySQL服务的登录和退出	★ 
+		登录需要采用用户名和密码
+			mysql -uroot -p123
+		退出：  exit
+		
+	MySQL的常见命令和语法规范 
+		show databases; 查看当前数据库管理系统中所有的数据库(会有四个默认的数据库)
+		create database 数据库名;    create database java0805;
+		use 数据库名;切换数据库
+		drop database 数据库名; 删除数据库
+		show tables; 查看当前数据库下所有的表格
+		
+		新建表格(有多少列，列名是什么，这一列数据的类型是什么)
+		
+		mysql中有哪些数据类型
+		
+		mysql中sql语句(命令)，不区分大小写，关键字会采用全大写，数据库名、表名、列名一般情况都全小写
+	
+	mysql中的注释
+		单行注释
+			--
+			#
+		多行注释
+			/*
+			
+			*/
+		
+	5. SQL： Structure Query Language      
+		结构化查询语言: 专门用来和数据库通信的语言
+		
+		SQL语言的分类
+			DDL:  Data Definition Language 数据定义语言   (数据是关系)
+				对库的操作
+				对表的操作
+			
+			DML:  Data Manipulation Language 数据操纵语言 ★  (操作的就是表格中的数据)
+				增加数据 insert
+				删除数据 delete
+				修改数据 update
+				查询数据 select   DQL: Data Query Language  数据查询语言
+				
+			DCL:  Data Control Language 数据控制语言
+				权限
+				事务
+	6. DDL:  Data Definition Language 数据定义语言   (数据是关系)
+			对库的操作
+				查看所有数据库
+					show databases;
+				切换数据库	
+					use 数据库名
+				新建数据库
+					create database 【if not exists】 新数据库名;
+				删除数据库
+					drop database 【if exists】 数据库名;
+			对表的操作	
+				新建表格 (表名、有哪些列：列的个数和名称、列的数据类型、【约束条件】)  
+					语法：create table 表名(列名1 1列的数据类型 【1列的约束条件】,列名2 2列的数据类型 【2列的约束条件】...);
+					
+					数据类型
+						整型
+							tinyint、smallint、mediumint、int、bigint
+							int【(3)】   默认是11位  
+						
+						浮点型
+							float、double
+							float/double【(n,m)】    
+								m:小数的位数     3
+								n:整数+小数的位数   5     
+						
+						字符串
+							char【(n)】 (定长字符串)  n代表的是字符串的最大长度，如果省略默认是1
+							varchar(n)  (变长字符串)  n代表的是字符串的最大长度,设置长度不能省略
+							
+								char【(5)】
+								varchar(10)  
+							
+						日期类型
+							year    只能存储年份
+							date    只能存储年月日
+							datetime   日期+时间			1900-1-1~9999-12-31    	不受时区和服务器版本的影响
+							timestamp  日期+时间  时间戳   	1970-1-1~2038-12-31		受时区和服务器版本的影响
+						
+						大字节
+							
+						大文本
+				查看表结构(表的列的信息)
+					desc 表名;
+				删除表格
+					drop table 表名;
+				表格结构的修改 (改名、新增一列、删除一列、修改列名、修改列的数据类型)    数据的修改  update
+					alter table 表名 后续操作;
+					
+					a. 修改表名
+						alter table emp rename employee;
+					b. 新增一列(必须有数据类型，可以有约束条件)
+						alter table employee add name varchar(10) not null;
+					c. 修改列名和数据类型
+						alter table employee change gender sex char;
+					d. 修改列的数据类型    (新数据类型要符合原来数据的类型)
+						alter table employee modify sex varchar(10);
+					e. 删除一列
+						alter table employee drop name;
+		练习：
+			学生表  
+					编号  整型
+					姓名
+					年龄
+					性别
+					手机号-座机号   021-555555
+					班级的编号
+					家庭地址
+						 create table student(
+							 id int,
+							 name varchar(10),
+							 age int,        
+							 gender char,
+							 phone varchar(11),
+							 class_id int,
+							 address varchar(20));
+			班级表 
+					编号
+					班级的名称 
+					班级的城市
+					班级的学生人数
+						 create table class(
+							 class_id int,
+							 class_name varchar(10),
+							 city varchar(5),
+							 num int);
+			约束条件   六大约束
+				a. 非空    not null    create table test1(id int,name varchar(10) not null);
+				b. 唯一    unique       create table test2(id int unique,name varchar(10) unique);
+				c. 主键(非空+唯一)   primary key    一般设置在编号这一列    create table test4(id int primary key,age int);
+				d. 默认值   default 值    create table test5(id int,name varchar(10) default 'jack');
+				e. 检查约束   check  (MySQL不支持)
+				f. 外键约束   foreign key    涉及到多表 
+				
+			机制：自增长机制   
+				auto_increment    必须使用在主键列、使用方式和约束条件一致 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,13 @@
+停止MySQL 
+1.找服务：在开始菜单下输入services.msc 停止mysql服务 
+2.在控制面板添加删除程序中卸载MySQL 
+3.到安装目录删除MySQL 
+4.删除：C:\Documents and Settings\All Users\Application Data\MySQL 
+5.查看注册表：(regedit命令) 
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services 
+HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services
+HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Services
+搜索mysql，找到一律干掉！
+============================ 
+
+不需要重启电脑，直接重新安装即可

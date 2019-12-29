@@ -1,0 +1,250 @@
+本单元目标  
+
+1.为什么要学习数据库  
+2.数据库的相关概念 
+	DBMS DB SQL 
+3. MySQl数据库存储数据的特点  
+4. 初识MySQL 
+	MySQL产品介绍 
+	MySQL产品的安装	★ 
+	MySQL服务的启动和停止	★ 
+	MySQL服务的登录和退出	★ 
+	MySQL的常见命令和语法规范  
+5.DDL语言的学习 √  
+	库和表的管理  
+	常见的约束 
+6.DML语言的学习 ★
+	添加数据  
+	修改数据
+	删除数据
+7.DQL语言的学习 ★★★
+	基础查询
+	条件查询
+	排序查询
+	常见函数
+	分组函数
+	分组查询
+	连接查询
+	子查询
+8.DCL语言的学习 
+	事务和事务处理 
+	
+	
+1.为什么要学习数据库 
+	数据库是什么？   存储数据的"仓库"  
+	存储在运行内存 (暂时的)    将数据持久化   
+	IO流：对象流 可以办到将数据持久化的 
+	
+	数据存储比较有规范，方便查询，共享性 
+2.数据库的相关概念 
+	DBMS
+		Database Managerment System
+		数据库管理系统:  数据库是通过DBMS创建和	操作的容器
+	DB
+		Database 存储数据的“仓库”，它保存了一系	列有组织的数据
+	SQL
+		Structure Query Language 结构化查询语言  
+		专门用来和数据库通信的语言  
+		
+3. MySQl数据库存储数据的特点 
+	
+	关系型数据库  MySQL / Oracle
+		1. 存储数据是采用表格的形式 
+		2. 表格和表格之间存在关联关系  
+	非关系型数据库
+		不是采用表格
+4. 初识MySQL
+	MySQL产品介绍
+		MySQL是一个小型关系型数据库管理系统，开发者为瑞典MySQL AB公司。
+		在2008年1月16号被Sun公司收购。而2009年,SUN又被Oracle收购.
+		小型、快速、成本低
+	MySQL产品的安装(MySQL服务器端的安装)	★
+		MySQL:数据库管理系统 
+		C/S :client(客户端) / server(服务器) 
+		
+		1. 检测电脑是否安装MySQL 
+			打开cmd   输入命令：mysql -uroot -p  回车
+		2. 卸载MySQL 
+		
+		3. 安装MySQL 
+		
+	MySQL服务的启动和停止	★
+		1. 运行   搜索服务   找到mysql的服务  右键  可以启动和停止
+		2. 停止   net stop 服务的名称
+		   启动   net start 服务的名称
+	MySQL服务的登录和退出	★
+		1. 登录是   输入用户名和密码   进行登录  (登录自己电脑上的mysql)
+		2. 退出  exit  or  直接关掉窗口
+	MySQL的常见命令和语法规范 
+		show databases;  显示所有的数据库
+		use 数据库名;
+		show tables;
+	语法规范：
+		a. MySQL中不区分大小写，关键字都大写，数据库名、表名、列名一般都小写 
+		b. 每行sql语句都必须用分号结尾   并且如果sql语句太长  可以换行的
+		c.注释
+			单行注释
+				-- 
+				# 
+			多行注释
+				/* 
+
+				*/
+
+5. SQL语言的分类
+	
+	DDL:  Data Definition Language 数据定义语言   (和数据无关) 
+		库和表的管理
+		常见的约束
+	DML: Data Manipulation Language 数据操纵语言   ★
+		新增数据 insert 
+		修改数据 update
+		删除数据 delete
+		查询数据 select  DQL: data query language 数据查询语言
+	DCL：Data Control Language 数据控制语言
+		权限 (MySQL没有) 
+		事务 
+6. DDL Data Definition Language 数据定义语言 
+	库的管理
+		显示所有数据库
+			show databases;
+		切换数据库
+			use 数据库名;
+		新建数据库
+			create database 【if not exists】 数据库名(自定义);
+		删除数据库
+			drop database 【if exists】 数据库名;
+	表的管理(常见的约束)
+		显示所有表格
+			show tables;
+		新建表格 (必须指定有哪些列(包括列名、列的数据类型、【约束条件：对数据的约束】))  
+			a. MySQL中的数据类型
+				整型 
+					TINYINT,SMALLINT,MEDIUMINT,INT,BIGINT
+					* INT(n)  【设置数字长度】 如果省略默认长度为为11位 
+				浮点型
+					FLOAT(n,m) DOUBLE(n,m) DECIMAL
+					* DOUBLE(n,m)  【设置小数的长度】
+						n: 正数+小数的长度     34.567
+						m: 小数的长度 
+				字符串
+					CHAR(n), VARCHAR(N)
+					CHAR(n) (定长字符串) 【n字符从长度】  如果省略  n默认是1 
+					VARCHAR(n) (变长字符串) n字符的长度  不能省略
+					
+					char(5)  
+					* varchar(5) 节省空间  
+				日期
+					date   日期
+					time   时间
+					datetime 日期+时间   1900-1-1~9999-12-31      不受时区和服务器版本的影响 
+					timestamp  时间戳  日期+时间   1970-1-1~2038-12-31     受时区和服务器版本的影响 
+					year  存储年份  
+			语法：   create table 表名(id int,name varchar(200),age int,gender char...);
+				create table student(id int,name varchar(200),age int);
+				
+			练习：   
+				学生表  
+					编号  整型
+					姓名
+					年龄
+					性别
+					手机号-座机号   021-555555
+					班级的编号
+					家庭地址
+					 create table student(
+						 stu_id int,
+						 stu_name varchar(20),
+						 stu_age int,
+						 stu_gender char(1),
+						 stu_phone varchar(11),
+						 class_id int);
+				班级表 
+					编号
+					班级的名称 
+					班级的城市
+					班级的学生人数
+					 create table class(
+						 class_id int,
+						 class_name varchar(20),
+						 class_city varchar(20),
+						 class_num int);
+			b. 新建表格时的约束条件  六大约束
+				NOT NULL   非空
+					create table student(id int,name varchar(20) not null);
+				UNIQUE    唯一
+					create table student(id int,name varchar(20) unique);
+				primary key  主键(非空+唯一)   一般应用在编号这一列        *
+					create table student(id int not null unique,name varchar(20));
+					create table student(id int primary key,name varchar(20));
+				check 检查约束 (mysql没有)   age int(3)    age>0 and age<=120
+				default  设置默认值 
+					 create table student(id int,name varchar(20) default 'zhaosi');
+				foreign key  外键  (涉及到多表) 
+				
+				机制：自增长机制    auto_increment  主要就是针对主键的  
+				
+					 create table student(id int primary key auto_increment,name varchar(20));
+					 
+				语法：create table 表名(id int 【约束条件】,name varchar(200)  【约束条件】,age int,gender char...);
+		修改表格  	
+			语法：alter table 表名 修改的内容
+				a. 将student表的表名改为stu
+					alter table student rename stu;
+				b. 新增一列
+					alter table stu add stu_address varchar(200);
+				c. 修改列名  stu_as
+					alter table stu change stu_address stu_as varchar(200);
+				d. 修改列的数据类型 (要满足数据的类型改变) 
+					alter table stu change stu_as stu_as varchar(100);
+					 
+					alter table stu modify stu_as varchar(50);
+				e. 删除这一列
+					alter table stu drop stu_as;
+		删除表格
+			drop table 表名;
+		查看表结构(查看表格有哪些列，以及列的数据类型，包括约束条件)
+			desc 表名;
+		
+7. DML: Data Manipulation Language 数据操纵语言 
+	增
+		单行添加：
+			语法：insert into 表名(列名1,列名2,列名3...) values(值1,值2,值3...);
+			数据：字符串和日期类型  需要添加引号 
+			案例一：insert into stu(stu_id,stu_name) values(1,'jack');
+			案例二： insert into stu(stu_id,stu_age,stu_gender,class_id) values(2,20,'n',605);
+			案例三：insert into stu(stu_id,stu_age,stu_name) values(3,23,'rose');
+		
+		多行添加:
+			语法：insert into 表名(列名1,列名2,列名3...) values(值1,值2,值3...),(值1,值2,值3...),(值1,值2,值3...)...;
+			insert into stu(stu_id,stu_name) values(4,'john'),(5,'tom'),(6,'jary');
+		练习：
+			将你所在当前组的学生信息添加到学生表中(20分钟) 
+			
+		如何添加数据时全部列(列名可以省略:表名后的括号可以省略)
+			insert into 表名(全列的列名) values(所有的值);
+				 insert into stu(stu_id,stu_name,stu_age,stu_gender,stu_phone,class_id)
+				 values(7,'lisi',18,'n','119',605);
+			简写版：要求：values里面的值顺序参考表结构
+				 insert into stu values(8,'wangwu',18,'n','119',605);
+		添加全部列多行数据：
+			insert into stu values(8,'wangwu',18,'n','119',605),(),()...;
+			
+	删
+	
+	改
+	
+	查(查数据)
+		select * from 表名;查看该表格的全部数据
+		
+8. 可视化工具   (客户端) 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
